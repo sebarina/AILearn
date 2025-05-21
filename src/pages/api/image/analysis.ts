@@ -1,7 +1,6 @@
-export const runtime = 'nodejs';
-import { NextApiRequest, NextApiResponse } from 'next';
+export const runtime = 'edge';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req:any) {
     
     try {
         const {imageUrl} = req.body;
@@ -21,15 +20,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
          })
          const data = await response.json()
          if (data.code == 0) {
-            return res.status(200).json({"code":200, message: '成功', "data":data.data});
+            return new Response(JSON.stringify({"code":200, message: '成功', "data":data.data}), {
+                headers: { 'Content-Type': 'application/json' },
+            });
          } else {
-            return res.status(200).json({ code:500, message: '请求失败' });
+            
+            return new Response(JSON.stringify({"code":500, message: '请求失败'}), {
+                headers: { 'Content-Type': 'application/json' },
+            });
+           
          }
 
         
 
     } catch (error) {
         console.log(error);
-        return res.status(200).json({ code:500, message: '请求失败' });
+        return new Response(JSON.stringify({"code":501, message: '请求异常'}), {
+                headers: { 'Content-Type': 'application/json' },
+        });
     }    
 }
