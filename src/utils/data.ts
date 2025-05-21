@@ -1,8 +1,4 @@
-export const runtime = 'edge';
-import { NextApiRequest, NextApiResponse } from 'next';
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const imageData = [
+export const imageData = [
       {
         "image_prompt_suggestion": "阳光明媚的春天，花园里，几个小朋友拿着各式各样的风筝在开心地奔跑放风筝。风筝在空中高高飞舞。小鸟在旁边飞翔，天上有几朵白云。场景充满活力和快乐。高清，色彩鲜艳。",
         "sample_text": "春姑娘迈着轻盈的步子，慢慢走来。拂去了寒冷，带来了温暖。微微的春风吹拂着树苗。小朋友们拿着自己的风筝来到花园中放风筝。大家比赛看谁把风筝放得最高最远。小鸟也飞来助威。云朵姐姐也飘来观看。",
@@ -190,13 +186,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ]
       }
     ];
-    try {
-        return res.status(200).json({"code":200, message: '成功', "data":{
-            "list":imageData
-        }});
-
-    } catch (error) {
-        console.log(error);
-        return res.status(200).json({ code:500, message: '请求失败' });
-    }    
-}

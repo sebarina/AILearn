@@ -98,5 +98,3 @@ export const getImageAnalysis = async (imageUrl:string) => {
     }
      
 }
-
-

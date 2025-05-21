@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'
 import { useRef } from "react";
 import { useEffect } from "react";
 import Image from "next/image";
@@ -11,11 +10,8 @@ import { Badge } from "flowbite-react";
 import { Textarea } from "flowbite-react";
 import { startSpeechRecognition } from "@/utils/speechRecognition";
 import { getImageAnalysis } from "@/utils/tools";
+import { imageData } from "@/utils/data";
 import Modal from "react-modal";
-
-import Link from "next/link";
-
-import { request } from "http";
 const page = () => {
     const [imageList,setImageList] = useState<any[]>([])
     const [selectedIndex,setSelectedIndex] = useState(0);
@@ -25,16 +21,7 @@ const page = () => {
     const [modalContent,setModalContent] = useState("");
 
     const speechRecognitionRef = useRef<any>(null);
-    const getBasicInfo = async ()=>{
-        const response = await fetch("/api/home/info", {
-            method:"GET"
-        });
-        const data = await response.json();
-        if (data.code === 200) {
-            setImageList(data.data.list)
-        }
-
-    }
+    
 
     const getSelectedImage = ()=>{
         if (selectedIndex < imageList.length) {
@@ -66,7 +53,7 @@ const page = () => {
     }
 
     useEffect(()=>{
-        getBasicInfo();
+        setImageList(imageData);
     },[])
 
     if (getSelectedImage() == null) {
