@@ -3,7 +3,9 @@ export const runtime = 'edge';
 export default async function handler(req:any) {
     
     try {
-        const {imageUrl} = req.body;
+        const body = await req.json();
+        const imageUrl = body.imageUrl;
+        console.log(`imageUrl = ${imageUrl}`);
         const response = await fetch(`https://api.coze.cn/v1/workflow/run`, {
             method: 'POST',
             headers: {
@@ -19,6 +21,7 @@ export default async function handler(req:any) {
             })
          })
          const data = await response.json()
+         console.log(data);
          if (data.code == 0) {
             return new Response(JSON.stringify({"code":200, message: '成功', "data":data.data}), {
                 headers: { 'Content-Type': 'application/json' },
