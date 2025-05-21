@@ -1,0 +1,14 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" rx="20" fill="#C4302B" />
+  <path d="M25 30C25 27.2386 27.2386 25 30 25H70C72.7614 25 75 27.2386 75 30V60C75 62.7614 72.7614 65 70 65H30C27.2386 65 25 62.7614 25 60V30Z" fill="#E4C06A" />
+  <path d="M32 37C32 34.7909 33.7909 33 36 33H64C66.2091 33 68 34.7909 68 37V53C68 55.2091 66.2091 57 64 57H36C33.7909 57 32 55.2091 32 53V37Z" fill="#FAF5EB" />
+  <path d="M50 33V57" stroke="#C4302B" stroke-width="2" stroke-linecap="round" />
+  <path d="M32 45H68" stroke="#C4302B" stroke-width="2" stroke-linecap="round" />
+  <path d="M40 73C40 71.8954 40.8954 71 42 71H58C59.1046 71 60 71.8954 60 73V73C60 74.1046 59.1046 75 58 75H42C40.8954 75 40 74.1046 40 73V73Z" fill="#E4C06A" />
+  <circle cx="35" cy="45" r="3" fill="#C4302B" />
+  <circle cx="65" cy="45" r="3" fill="#C4302B" />
+  <circle cx="50" cy="45" r="3" fill="#C4302B" />
+  <path d="M25 75H75" stroke="#E4C06A" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" />
+  <path d="M30 25C30 22.7909 31.7909 21 34 21H66C68.2091 21 70 22.7909 70 25V25H30V25Z" fill="#E4C06A" />
+  <path d="M40 25V21C40 19.8954 40.8954 19 42 19H58C59.1046 19 60 19.8954 60 21V25" stroke="#C4302B" stroke-width="2" />
+</svg>
