@@ -11,7 +11,7 @@ export default function Layout({
     <div className="w-full min-h-screen bg-[#f0f9ff]">
         <Header />
           {/* Body Content  */}
-          <div className="bg-[#f0f9ff] rounded-page min-h-[90vh]" id="content_body">
+          <div className="bg-[#f0f9ff] min-h-[90vh]" id="content_body">
             <div
               className={`container mx-auto p-4`}
             >

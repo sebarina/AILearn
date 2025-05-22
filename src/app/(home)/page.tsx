@@ -1,28 +1,20 @@
 "use client";
 import React from "react";
 import { useState } from 'react';
-import { useRef } from "react";
 import { useEffect } from "react";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import ReactMarkdown from "react-markdown"
 import { Badge } from "flowbite-react";
-import { Textarea } from "flowbite-react";
-import { startSpeechRecognition } from "@/utils/speechRecognition";
 import { getImageAnalysis } from "@/utils/tools";
 import { imageData } from "@/utils/data";
 import Modal from "react-modal";
+import SpeakPractice from "./components/SpeakPractice";
 const page = () => {
     const [imageList,setImageList] = useState<any[]>([])
     const [selectedIndex,setSelectedIndex] = useState(0);
-    const [isRecording,setIsRecording] = useState(false);
-    const [inputText,setInputText] = useState("");
     const [isModalOpen,setIsModalOpen] = useState(false);
     const [modalContent,setModalContent] = useState("");
-
-    const speechRecognitionRef = useRef<any>(null);
-    
-
     const getSelectedImage = ()=>{
         if (selectedIndex < imageList.length) {
             return imageList[selectedIndex];
@@ -40,16 +32,19 @@ const page = () => {
     };
 
     const getXuezuoFenxi = async ()=>{
-        if(modalContent == ""){
-            const analysis = await getImageAnalysis(getSelectedImage().generated_image_url)
-            if (analysis != null) {
-                setModalContent(analysis);
-                setIsModalOpen(true)
-            }
+        setModalContent("当然可以！以下是根据你提供的图片生成的一年级看图写话写作指导👇\n\n---\n\n### 🖼 图画内容描述\n\n秋天到了，金黄的稻田里，大人和小孩正在忙着收割庄稼。天上飞着大雁，还有一只小鸟飞过。大家脸上都带着笑容，丰收的季节真美好！\n\n---\n\n### ❓ 提示性问题\n\n1. 图里有谁？他们在做什么？\n2. 稻田里有什么？颜色是什么？\n3. 天空中有什么？你觉得天气怎么样？\n4. 如果你在田野里，你会做什么？\n\n---\n\n### ✏️ 写作引导词\n\n今天、我看到、大家正在、金黄金黄的、飞来飞去的、开心地、慢慢地、最后\n\n---\n\n### 📝 示例范文（贴近一年级儿童）\n\n秋天到了，稻田变得金黄金黄的。小朋友在田里拔稻子，叔叔阿姨也在忙着收割。天上飞着一群大雁，还有一只小鸟飞过来，好像在说：“你们真棒！”大家都很开心。秋天真是一个快乐的季节！\n\n---\n\n需要我继续为其他图片生成类似内容吗？也可以帮你整理成卡片或打印版哦 😊\n");
+        setIsModalOpen(true)
+    //     if(modalContent == ""){
+    //         const temp = getSelectedImage();
+    //         const analysis = await getImageAnalysis(temp.generated_image_url,temp.image_prompt_suggestion)
+    //         if (analysis != null) {
+    //             setModalContent(analysis);
+    //             setIsModalOpen(true)
+    //         }
            
-       } else {
-            setIsModalOpen(true);
-       }
+    //    } else {
+    //         setIsModalOpen(true);
+    //    }
     }
 
     useEffect(()=>{
@@ -143,51 +138,8 @@ const page = () => {
                     </div>
                 </div> 
                 <div className="bg-white p-4 rounded-xl shadow-md">
-                    <h2 className="text-xl font-bold text-green-600 mb-2 flex items-center">
-                        <Icon icon="lucide:mic-vocal" width="24" height="24" className="mr-2"></Icon>说图练表达
-                    </h2>
-                    <p className="text-gray-600 text-sm mb-4">录下你对图片的描述，锻炼口语表达能力</p>
-                    
-                    <div className="flex justify-center space-x-4">
-                        <button id="start-record-btn" className={`bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full flex items-center ${isRecording? 'hidden':''}`}
-                        onClick={()=>{
-                            setIsRecording(true);
-                            speechRecognitionRef.current = startSpeechRecognition((result:any)=>{
-                                console.log(result);
-                                const textAreaText = (document.getElementById("writing-textarea") as HTMLTextAreaElement).value;
-                                const text = `${textAreaText} ${result.text}` ;
-                                setInputText(text);
-                            },(error:any)=>{
-                                console.log(error);
-                            });
-                        }}>
-                            <Icon icon="lucide:mic" width="24" height="24" className="mr-2"></Icon>开始录音
-                        </button>
-                        <button id="stop-record-btn" className={`bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full flex items-center ${isRecording?'':'hidden'}`}
-                        onClick={()=>{
-                                setIsRecording(false);
-                                speechRecognitionRef.current();
-                            }}>
-                        <Icon icon="lucide:mic" width="24" height="24" className="mr-2"></Icon>停止录音
-                        </button>
-                    </div>
+                    <SpeakPractice></SpeakPractice>
                 </div>              
-                <div id="writing-area" className="bg-white p-4 rounded-xl shadow-md relative">
-                    <h3 className="text-lg font-semibold text-gray-700 mb-2">我的写话：</h3>
-                    <Textarea
-                        id="writing-textarea"
-                        name="description"
-                        className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 focus:border-blue-300 outline-none transition-colors resize-none"
-                        rows={6}
-                        placeholder="请输入你的想法..."
-                        value={inputText}
-                        onChange={(e)=>{
-                            setInputText(e.target.value);
-                        }}
-                    >
-
-                    </Textarea>
-                </div>
                 
                
                 <div id="ai-feedback" className="bg-white p-4 rounded-xl shadow-md hidden transition-all duration-300">
@@ -202,11 +154,11 @@ const page = () => {
 
     
                 <div className="flex space-x-4 mt-6">
-                    <button id="get-feedback-btn" className="flex-1 bg-purple-500 hover:bg-purple-600 text-white py-3 px-6 rounded-lg shadow-md transition-colors font-medium">
-                        <i className="fas fa-comment-dots mr-2"></i>获取AI评价
+                    <button id="get-feedback-btn" className="flex-1 bg-purple-500 hover:bg-purple-600 text-white py-3 px-6 rounded-lg shadow-md transition-colors font-medium flex items-center justify-center">
+                        <Icon icon="lucide:message-square-more" width="24" height="24" className="mr-2"></Icon>获取AI评价
                     </button>
-                    <button id="submit-writing-btn" className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg shadow-md transition-colors font-medium">
-                        <i className="fas fa-paper-plane mr-2"></i>完成并保存
+                    <button id="submit-writing-btn" className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg shadow-md transition-colors font-medium flex items-center justify-center">
+                        <Icon icon="lucide:save-all" width="24" height="24" className="mr-2"></Icon>完成并保存
                     </button>
                 </div>
             </div>
@@ -214,14 +166,14 @@ const page = () => {
         <Modal isOpen={isModalOpen} 
         onRequestClose={()=>setIsModalOpen(false)}
         contentLabel="AI小老师"
-        className="modal"
+        className="modal focus:outline-none focus:ring-0"
         style={{
             content: {
               width: '100%',
               maxHeight: '90vh',
               margin: 'auto',
               padding: '20px',
-              borderRadius: '8px',
+            //   borderRadius: '8px',
               overflowY: 'auto', // 内容区域可滚动
               top: '50%',
               left: '50%',
@@ -238,6 +190,15 @@ const page = () => {
         }}
         >
             <div className="bg-white rounded-2xl mt-20 px-4 py-6 animate-slide-up">
+                <div className="absolute right-4 top-4 flex items-center justify-end" onClick={
+                   ()=>{
+                        setIsModalOpen(false);
+                    }         
+                }>
+                    <div className="bg-black bg-opacity-50 rounded-full p-4 text-white">
+                        <Icon icon="lucide:circle-x" width="24" height="24"></Icon>
+                    </div>
+                </div>
                 <ReactMarkdown>{modalContent}</ReactMarkdown>   
                    
             </div>

@@ -16,8 +16,7 @@ export default async function handler(req:any) {
                 "app_id": "7506692414422171698",
 				"workflow_id":"7506711692366676031",
 				"parameters":{
-					"input":imageUrl,
-                    "description":body.description
+					"input":imageUrl
 				}
             })
          })

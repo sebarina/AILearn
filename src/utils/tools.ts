@@ -67,7 +67,7 @@ export const getStringValueOfObject = (obj: any): string => {
     return "";
 }
 
-export const getImageAnalysis = async (imageUrl:string) => {
+export const getImageAnalysis = async (imageUrl:string, desc:string) => {
     showLoading("正在分析...");
     try{
         const response = await fetch(`/api/image/analysis`, {
@@ -76,7 +76,8 @@ export const getImageAnalysis = async (imageUrl:string) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                imageUrl: imageUrl
+                imageUrl: imageUrl,
+                description:desc
             })
          })
          const data = await response.json()
