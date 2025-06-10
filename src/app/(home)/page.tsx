@@ -33,7 +33,7 @@ const page = () => {
 
     const getXuezuoFenxi = async ()=>{
         // setModalContent("当然可以！以下是根据你提供的图片生成的一年级看图写话写作指导👇\n\n---\n\n### 🖼 图画内容描述\n\n秋天到了，金黄的稻田里，大人和小孩正在忙着收割庄稼。天上飞着大雁，还有一只小鸟飞过。大家脸上都带着笑容，丰收的季节真美好！\n\n---\n\n### ❓ 提示性问题\n\n1. 图里有谁？他们在做什么？\n2. 稻田里有什么？颜色是什么？\n3. 天空中有什么？你觉得天气怎么样？\n4. 如果你在田野里，你会做什么？\n\n---\n\n### ✏️ 写作引导词\n\n今天、我看到、大家正在、金黄金黄的、飞来飞去的、开心地、慢慢地、最后\n\n---\n\n### 📝 示例范文（贴近一年级儿童）\n\n秋天到了，稻田变得金黄金黄的。小朋友在田里拔稻子，叔叔阿姨也在忙着收割。天上飞着一群大雁，还有一只小鸟飞过来，好像在说：“你们真棒！”大家都很开心。秋天真是一个快乐的季节！\n\n---\n\n需要我继续为其他图片生成类似内容吗？也可以帮你整理成卡片或打印版哦 😊\n");
-        setIsModalOpen(true)
+        // setIsModalOpen(true)
         if(modalContent == ""){
             const temp = getSelectedImage();
             const analysis = await getImageAnalysis(temp.generated_image_url,temp.image_prompt_suggestion)
