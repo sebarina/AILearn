@@ -10,7 +10,7 @@ export default async function handler(req:any) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization':"Bearer pat_GvOP7slpNQo4YZ89NaMFvzsDcVU9Yj5AJsIbYPysBRD5l6O9iceF6sq6G5WLV1Me"
+                'Authorization':"Bearer pat_FETIki20RxJrejzzBlzgh8sMQmwAzYqnSEu8uFeZppgcBUA1CoQ5DEYxyzoGhbn0"
             },
             body: JSON.stringify({
                 "app_id": "7506692414422171698",
